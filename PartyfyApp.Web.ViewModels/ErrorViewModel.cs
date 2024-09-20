@@ -1,4 +1,4 @@
-namespace PartyfyApp.Web.Models
+namespace PartyfyApp.Web.ViewModels
 {
     public class ErrorViewModel
     {

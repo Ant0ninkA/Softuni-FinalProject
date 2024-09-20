@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using PartyfyApp.Web.Data;
+using PartyfyApp.Data;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 

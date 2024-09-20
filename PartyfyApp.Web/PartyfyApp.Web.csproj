@@ -16,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PartfyApp.Common\PartfyApp.Common.csproj" />
     <ProjectReference Include="..\PartyfyApp.Data\PartyfyApp.Data.csproj" />
+    <ProjectReference Include="..\PartyfyApp.Web.ViewModels\PartyfyApp.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 using Microsoft.AspNetCore.Mvc;
 
-using PartyfyApp.Web.Models;
+using PartyfyApp.Web.ViewModels;
 
 namespace PartyfyApp.Web.Controllers
 {
