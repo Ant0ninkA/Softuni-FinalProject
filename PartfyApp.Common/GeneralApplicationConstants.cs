@@ -1,4 +1,4 @@
-﻿namespace PartfyApp.Common
+﻿namespace PartyfyApp.Common
 {
     public static class GeneralApplicationConstants
     {

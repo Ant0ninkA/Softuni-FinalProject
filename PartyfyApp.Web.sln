@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{25CC54FB-21D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyfyApp.Web.ViewModels", "PartyfyApp.Web.ViewModels\PartyfyApp.Web.ViewModels.csproj", "{0244F4EF-DCE5-4392-B225-BBAEB61A4FE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartfyApp.Common", "PartfyApp.Common\PartfyApp.Common.csproj", "{3D7AD1CF-1A4E-4CE6-8CE7-8966D8B16D38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartyfyApp.Common", "PartfyApp.Common\PartyfyApp.Common.csproj", "{3D7AD1CF-1A4E-4CE6-8CE7-8966D8B16D38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
