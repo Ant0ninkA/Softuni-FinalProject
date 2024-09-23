@@ -17,9 +17,6 @@
         [StringLength(TypeMaxLength)]
         public string Type { get; set; } = null!;
 
-        [Required]
-        public decimal Price { get; set; }
-
         public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

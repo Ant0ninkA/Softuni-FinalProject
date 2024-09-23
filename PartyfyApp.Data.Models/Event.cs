@@ -33,16 +33,14 @@
         public DateTime CreatedOn { get; set; }
 
         [Required]
-        public string PosterImagePath { get; set; }
+        public string PosterImagePath { get; set; } = null!;
         public bool Status  { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; } = null!;
         public Guid HosterId { get; set; }
         public virtual Hoster Hoster { get; set; } = null!;
         public Guid? UserId { get; set; }
-        public ApplicationUser? User { get; set; }
-
-        public int TicketCount { get; set; }
+        public virtual ApplicationUser? User { get; set; }
 
         public virtual ICollection<Ticket> Tickets { get; set; }
 
