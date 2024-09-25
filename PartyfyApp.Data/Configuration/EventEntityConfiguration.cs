@@ -19,6 +19,9 @@
                 .WithMany(c => c.MyEvents)
                 .HasForeignKey(e => e.HosterId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder
+                .HasData(this.GenerateEvents());
         }
 
         private Event[] GenerateEvents()
@@ -37,7 +40,7 @@
                 CreatedOn = DateTime.UtcNow,
                 PosterImagePath = "~/images/EXE CLUB.png",
                 CategoryId = 4,
-                HosterId = Guid.Parse("F875A472-77C7-4908-AEEF-6D2B031282E1")
+                HosterId = Guid.Parse("0D62ABEB-9BF6-4EF1-B428-2712CCCCDD29")
             };
             events.Add(currEvent);
 
@@ -52,7 +55,7 @@
                 CreatedOn = DateTime.UtcNow,
                 PosterImagePath = "~/images/Ladies Night.png",
                 CategoryId = 5,
-                HosterId = Guid.Parse("F875A472-77C7-4908-AEEF-6D2B031282E1")
+                HosterId = Guid.Parse("0D62ABEB-9BF6-4EF1-B428-2712CCCCDD29")
             };
             events.Add(currEvent);
 
@@ -62,12 +65,12 @@
                 Title = "Les Machines with Commissar Lag",
                 Description = "Our world-class DJ lineup will take you on an intense sonic journey with hard-hitting bass, hypnotic melodies, and deep, driving rhythms that will make you lose yourself on the dance floor. This is where the music speaks, and the crowd moves as one.",
                 Location = "Yalta club, Sofia",
-                DJ = "Dimitar Georgiev - Groky",
+                DJ = "Groky",
                 EventDate = new DateTime(2025, 1, 25),
                 CreatedOn = DateTime.UtcNow,
                 PosterImagePath = "~/images/Techno Rave.png",
                 CategoryId = 1,
-                HosterId = Guid.Parse("F875A472-77C7-4908-AEEF-6D2B031282E1")
+                HosterId = Guid.Parse("0D62ABEB-9BF6-4EF1-B428-2712CCCCDD29")
             };
             events.Add(currEvent);
 

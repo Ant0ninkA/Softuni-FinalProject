@@ -2,12 +2,14 @@
 {
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
     using Models;
     public class TicketTypeEntityConfiguration : IEntityTypeConfiguration<TicketType>
     {
         public void Configure(EntityTypeBuilder<TicketType> builder)
         {
-
+            builder
+                .HasData(this.GenerateTypes());
         }
 
         private TicketType[] GenerateTypes()
