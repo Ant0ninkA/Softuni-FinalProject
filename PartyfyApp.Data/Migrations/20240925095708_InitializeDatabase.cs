@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PartyfyApp.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitializeDb : Migration
+    public partial class InitializeDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -208,7 +208,7 @@ namespace PartyfyApp.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Decription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Location = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     DJ = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -232,13 +232,13 @@ namespace PartyfyApp.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Events_Hosters_HosterId",
                         column: x => x.HosterId,
                         principalTable: "Hosters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -259,43 +259,38 @@ namespace PartyfyApp.Data.Migrations
                         column: x => x.EventId,
                         principalTable: "Events",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Tickets_TicketTypes_TicketTypeId",
                         column: x => x.TicketTypeId,
                         principalTable: "TicketTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserTickets",
+                name: "TicketsBuyers",
                 columns: table => new
                 {
-                    TicketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BuyerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    TicketsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BuyersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTickets", x => new { x.TicketId, x.BuyerId });
+                    table.PrimaryKey("PK_TicketsBuyers", x => new { x.TicketsId, x.BuyersId });
                     table.ForeignKey(
-                        name: "FK_UserTickets_BuyerId",
-                        column: x => x.BuyerId,
+                        name: "FK_TicketsBuyers_AspNetUsers_BuyersId",
+                        column: x => x.BuyersId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_UserTickets_Tickets_TicketId",
-                        column: x => x.TicketId,
+                        name: "FK_TicketsBuyers_Tickets_BuyedTicketsId",
+                        column: x => x.TicketsId,
                         principalTable: "Tickets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserTickets_BuyerId",
-                table: "UserTickets",
-                column: "BuyerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -365,14 +360,16 @@ namespace PartyfyApp.Data.Migrations
                 name: "IX_Tickets_TicketTypeId",
                 table: "Tickets",
                 column: "TicketTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketsBuyers_BuyersId",
+                table: "TicketsBuyers",
+                column: "BuyersId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "ApplicationUserTicket");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -389,10 +386,13 @@ namespace PartyfyApp.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Tickets");
+                name: "TicketsBuyers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Tickets");
 
             migrationBuilder.DropTable(
                 name: "Events");

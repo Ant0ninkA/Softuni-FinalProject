@@ -4,6 +4,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using PartyfyApp.Data.Models;
+    using System.Reflection;
 
     public class PartyfyAppDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
@@ -21,6 +22,9 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            Assembly configurationAssembly = Assembly.GetAssembly(typeof(PartyfyAppDbContext)) ??Assembly.GetExecutingAssembly();
+            builder.ApplyConfigurationsFromAssembly(configurationAssembly);
+
             base.OnModelCreating(builder);
         }
 

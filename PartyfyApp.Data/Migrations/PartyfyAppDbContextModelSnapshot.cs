@@ -22,19 +22,19 @@ namespace PartyfyApp.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("UserTickets", b =>
+            modelBuilder.Entity("ApplicationUserTicket", b =>
                 {
-                    b.Property<Guid>("TicketId")
+                    b.Property<Guid>("BuyedTicketsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BuyerId")
+                    b.Property<Guid>("BuyersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("TicketId", "BuyerId");
+                    b.HasKey("BuyedTicketsId", "BuyersId");
 
-                    b.HasIndex("BuyerId");
+                    b.HasIndex("BuyersId");
 
-                    b.ToTable("UserTickets");
+                    b.ToTable("TicketsBuyers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -275,7 +275,7 @@ namespace PartyfyApp.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("Decription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -387,7 +387,7 @@ namespace PartyfyApp.Data.Migrations
                 {
                     b.HasOne("PartyfyApp.Data.Models.Ticket", null)
                         .WithMany()
-                        .HasForeignKey("BuyedTisketsId")
+                        .HasForeignKey("BuyedTicketsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -454,13 +454,13 @@ namespace PartyfyApp.Data.Migrations
                     b.HasOne("PartyfyApp.Data.Models.Category", "Category")
                         .WithMany("Events")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PartyfyApp.Data.Models.Hoster", "Hoster")
                         .WithMany("MyEvents")
                         .HasForeignKey("HosterId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PartyfyApp.Data.Models.ApplicationUser", "User")
@@ -490,13 +490,13 @@ namespace PartyfyApp.Data.Migrations
                     b.HasOne("PartyfyApp.Data.Models.Event", "Event")
                         .WithMany("Tickets")
                         .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("PartyfyApp.Data.Models.TicketType", "TicketType")
                         .WithMany("Tickets")
                         .HasForeignKey("TicketTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Event");

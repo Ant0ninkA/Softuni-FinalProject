@@ -18,7 +18,7 @@
 
         [Required]
         [StringLength(DescriptionMaxLength)]
-        public string Decription { get; set; } = null!;
+        public string Description { get; set; } = null!;
 
         [Required]
         [StringLength(LocationMaxLength)]

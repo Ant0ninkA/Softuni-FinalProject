@@ -3,7 +3,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    using PartyfyApp.Data.Models;
+    using Models;
     public class TicketEntityConfiguration : IEntityTypeConfiguration<Ticket>
     {
         public void Configure(EntityTypeBuilder<Ticket> builder)
@@ -26,5 +26,17 @@
                 .UsingEntity(tb => tb.ToTable("TicketsBuyers"));
 
         }
+
+        //private Ticket[] GenerateTickets()
+        //{
+        //    ICollection < Ticket > = new HashSet<Ticket>();
+
+        //    Ticket ticket;
+
+        //    ticket = new Ticket()
+        //    {
+                
+        //    }
+        //}
     }
 }
