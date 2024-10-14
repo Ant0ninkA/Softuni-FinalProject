@@ -1,11 +1,10 @@
-using System.Diagnostics;
-
-using Microsoft.AspNetCore.Mvc;
-
-using PartyfyApp.Web.ViewModels;
-
 namespace PartyfyApp.Web.Controllers
 {
+    using System.Diagnostics;
+
+    using Microsoft.AspNetCore.Mvc;
+
+    using PartyfyApp.Web.ViewModels;
     public class HomeController : Controller
     {
         public HomeController()

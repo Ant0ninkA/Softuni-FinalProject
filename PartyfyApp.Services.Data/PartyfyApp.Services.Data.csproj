@@ -7,15 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PartfyApp.Common\PartyfyApp.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Event\" />
+    <ProjectReference Include="..\PartyfyApp.Data.Models\PartyfyApp.Data.Models.csproj" />
+    <ProjectReference Include="..\PartyfyApp.Data\PartyfyApp.Data.csproj" />
+    <ProjectReference Include="..\PartyfyApp.Web.ViewModels\PartyfyApp.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

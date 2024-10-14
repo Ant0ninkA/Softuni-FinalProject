@@ -1,0 +1,55 @@
+﻿﻿﻿@using static PartyfyApp.Common.NotificationMessagesConstants;
+
+@section Styles {
+    <style>
+        #toast-container {
+            position: fixed;
+            z-index: 9999; 
+        }
+
+        .toast {
+            margin-bottom: 20px;
+            pointer-events: none;  
+        }
+    </style>
+}
+<script type="text/javascript">
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+@if (TempData.ContainsKey(ErrorMessage))
+{
+    <script>toastr.error('@TempData[ErrorMessage]');</script>
+}
+
+@if (TempData.ContainsKey(WarningMessage))
+{
+    <script>toastr.warning('@TempData[WarningMessage]');</script>
+}
+
+@if (TempData.ContainsKey(InformationMessage))
+{
+    <script>toastr.info('@TempData[InformationMessage]');</script>
+}
+
+@if (TempData.ContainsKey(SuccessMessage))
+{
+    <script>toastr.success('@TempData[SuccessMessage]');</script>
+
+}

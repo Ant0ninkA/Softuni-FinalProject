@@ -7,15 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PartfyApp.Common\PartyfyApp.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Event\" />
+    <ProjectReference Include="..\PartyfyApp.Services.Data\PartyfyApp.Services.Data.csproj" />
   </ItemGroup>
 
 </Project>

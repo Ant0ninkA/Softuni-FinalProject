@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
+﻿#nullable disable
 namespace PartyfyApp.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
     /// <inheritdoc />
     public partial class InitializeDatabase : Migration
     {
