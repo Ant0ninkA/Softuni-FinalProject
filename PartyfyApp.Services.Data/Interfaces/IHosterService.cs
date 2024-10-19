@@ -9,5 +9,7 @@ namespace PartyfyApp.Services.Data.Interfaces
         Task<bool> HosterExistsByIdAsync(string userId);
 
         Task<bool> HosterExistsByPhoneNumberAsync(string phoneNumber);
+
+        Task<string> GetHosterIdAsync(string userId);
     }
 }

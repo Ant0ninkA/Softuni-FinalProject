@@ -25,6 +25,16 @@
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<string> GetHosterIdAsync(string userId)
+        {
+            string result = await _dbContext.Hosters
+                .Where(h => h.UserId.ToString() == userId)
+                .Select(h => h.Id.ToString())
+                .FirstAsync();
+
+            return result;
+        }
+
         public async Task<bool> HosterExistsByIdAsync(string userId)
         {
             return await _dbContext.Hosters.AnyAsync(h => h.UserId.ToString() == userId);
