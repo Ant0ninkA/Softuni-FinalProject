@@ -6,6 +6,8 @@ namespace PartyfyApp.Services.Data.Interfaces
     {
         Task<IEnumerable<EventSelectCategoryViewModel>> AllCategoriesAsync();
 
+        Task<IEnumerable<string>> AllNamesAsync();
+
         Task<bool> ExistsByIdAsync(int id);
     }
 }

@@ -27,6 +27,16 @@ namespace PartyfyApp.Services.Data
             return categories;
         }
 
+        public async Task<IEnumerable<string>> AllNamesAsync()
+        {
+            IEnumerable<string> categories =
+                await _dbContext.Categories
+                .Select (c => c.Name)
+                .ToArrayAsync();
+
+            return categories;
+        }
+
         public async Task<bool> ExistsByIdAsync(int id)
         {
             return await _dbContext.Categories.AnyAsync(c => c.Id == id);

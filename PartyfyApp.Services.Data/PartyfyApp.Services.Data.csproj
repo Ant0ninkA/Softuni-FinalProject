@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PartfyApp.Common\PartyfyApp.Common.csproj" />
+    <ProjectReference Include="..\PartfyApp.Services.Data.Models\PartfyApp.Services.Data.Models.csproj" />
     <ProjectReference Include="..\PartyfyApp.Data.Models\PartyfyApp.Data.Models.csproj" />
     <ProjectReference Include="..\PartyfyApp.Data\PartyfyApp.Data.csproj" />
     <ProjectReference Include="..\PartyfyApp.Web.ViewModels\PartyfyApp.Web.ViewModels.csproj" />

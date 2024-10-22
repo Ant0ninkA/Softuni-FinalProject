@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using PartfyApp.Services.Data.Models.Event;
     using PartyfyApp.Data.Models;
     using PartyfyApp.Services.Data;
     using PartyfyApp.Services.Data.Interfaces;
@@ -24,10 +25,17 @@
 
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery]AllEventsQueryModel queryModel)
         {
-            return View();
+            AllEventsFilteredAndPagedServiceModel serviceModel = await _eventService.AllAsync(queryModel);
+
+            queryModel.Events = serviceModel.Events;
+            queryModel.TotalEvents = serviceModel.TotalEvents;
+            queryModel.Categories = await _categoryService.AllNamesAsync();
+
+            return View(queryModel);
         }
 
         [HttpGet]

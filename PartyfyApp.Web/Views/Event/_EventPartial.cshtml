@@ -1,0 +1,108 @@
+﻿<div class="col-md-4 col-sm-6 mb-4">
+    <div class="event-card h-100 d-flex flex-column p-3 shadow-sm" style="border-radius: 8px; background-color: #f9f9f9;">
+        <div class="event-poster mb-3">
+            <img src="@Url.Content(Model.PosterImagePath)" alt="Event Poster" class="img-fluid" style="border-radius: 8px;" />
+        </div>
+        <div class="event-title mb-3 text-center">
+            <h4>@Model.Title</h4>
+        </div>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+            <a asp-area="" asp-controller="Event" asp-action="Like" asp-route-id="@Model.Id"
+               class="btn like-btn like-button">
+                <i class="fas fa-heart"></i> Like
+            </a>
+            <a asp-area="" asp-controller="Event" asp-action="BuyTickets" asp-route-id="@Model.Id"
+               class="btn buy-tickets-btn"><i class="fas fa-ticket-alt"></i> Buy Ticket</a>
+            <a asp-area="" asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id"
+               class="btn details-btn">
+                Details
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .event-card {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .event-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+    .event-title h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .event-poster img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+        border-radius: 8px;
+    }
+
+    .like-btn {
+        color: #BF0065;
+        border-color: #BF0065; 
+        padding: 8px 14px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .like-btn:hover {
+         background-color: #BF0065;
+         color: white;
+     }
+
+    .buy-tickets-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: bold; 
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+     .buy-tickets-btn:hover {
+         background-color: #218838; 
+         transform: scale(1.05);
+     }
+
+    .details-btn {
+        color: #BF0065;
+        border-color: #BF0065;
+        padding: 8px 14px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .details-btn:hover {
+        background-color: #BF0065;
+        color: white;
+     }
+
+    .d-flex {
+        gap: 10px;
+    }
+
+    .mt-auto {
+        margin-top: auto;
+    }
+
+</style>
