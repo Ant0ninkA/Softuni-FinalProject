@@ -8,5 +8,11 @@
         Task AddAsync(string userId, EventFormViewModel model, string posterPath);
 
         Task<AllEventsFilteredAndPagedServiceModel> AllAsync(AllEventsQueryModel queryModel);
+
+        Task<IEnumerable<EventAllViewModel>> AllLiked(string userId);
+
+        Task LikeAsync(string userId, int eventId);
+
+        Task<bool> ExistsByIdAsync(int eventId);
     }
 }

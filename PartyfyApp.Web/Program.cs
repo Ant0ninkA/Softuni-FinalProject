@@ -32,6 +32,12 @@ internal class Program
 
         builder.Services.AddControllersWithViews();
 
+        builder.Services.ConfigureApplicationCookie(options =>
+        {
+            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            options.Cookie.SameSite = SameSiteMode.Strict;
+        });
+
         WebApplication app = builder.Build();
 
         // Configure the HTTP request pipeline.

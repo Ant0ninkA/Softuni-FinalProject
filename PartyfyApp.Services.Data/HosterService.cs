@@ -5,6 +5,7 @@
     using PartyfyApp.Data.Models;
     using PartyfyApp.Services.Data.Interfaces;
     using PartyfyApp.Web.ViewModels.Hoster;
+
     public class HosterService : IHosterService
     {
         private readonly PartyfyAppDbContext _dbContext;
@@ -27,12 +28,31 @@
 
         public async Task<string> GetHosterIdAsync(string userId)
         {
-            string result = await _dbContext.Hosters
-                .Where(h => h.UserId.ToString() == userId)
-                .Select(h => h.Id.ToString())
-                .FirstAsync();
+            Hoster? hoster = await _dbContext
+                .Hosters
+                .FirstOrDefaultAsync(a => a.UserId.ToString() == userId);
 
-            return result;
+            if (hoster == null)
+            {
+                return null;
+            }
+
+            return hoster.Id.ToString();
+        }
+
+        public async Task<bool> HasEventWithId(string hosterId, int eventId)
+        {
+
+            Hoster? hoster =  await _dbContext.Hosters
+                .Include(h => h.MyEvents)
+                .FirstOrDefaultAsync(h => h.Id.ToString() == hosterId);
+
+            if(hoster == null)
+            {
+                return false;
+            }
+
+            return hoster.MyEvents.Any(e => e.Id == eventId);
         }
 
         public async Task<bool> HosterExistsByIdAsync(string userId)

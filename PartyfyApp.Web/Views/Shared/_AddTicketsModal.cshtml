@@ -1,0 +1,55 @@
+﻿@model TicketFormViewModel
+
+<div class="modal fade" id="addTicketsModal" tabindex="-1" aria-labelledby="addTicketsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addTicketsModalLabel">Add Tickets for Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Add" asp-controller="Ticket">
+                    <input type="hidden" asp-for="EventId"/>
+
+                    <div class="row mb-3">
+                        <div class="form-group col-md-4">
+                            <label asp-for="VipPrice">VIP Price</label>
+                            <input type="number" asp-for="VipPrice" class="form-control" />
+                            <span asp-validation-for="VipPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="StandardPrice">Standard Price</label>
+                            <input type="number" asp-for="StandardPrice" class="form-control" />
+                            <span asp-validation-for="StandardPrice" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="StandingPrice">Standing Price</label>
+                            <input type="number" asp-for="StandingPrice" class="form-control" />
+                            <span asp-validation-for="StandingPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="VipQuantity">VIP Quantity</label>
+                            <input type="number" asp-for="VipQuantity" class="form-control" />
+                            <span asp-validation-for="VipQuantity" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="StandardQuantity">Standard Quantity</label>
+                            <input type="number" asp-for="StandardQuantity" class="form-control" />
+                            <span asp-validation-for="StandardQuantity" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label asp-for="StandingQuantity">Standing Quantity</label>
+                            <input type="number" asp-for="StandingQuantity" class="form-control" />
+                            <span asp-validation-for="StandingQuantity" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Save Tickets</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

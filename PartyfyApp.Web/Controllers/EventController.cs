@@ -75,7 +75,7 @@
                 await _hosterService.HosterExistsByIdAsync(User.GetId());
             if (!isHoster)
             {
-                TempData[ErrorMessage] = "You must become a hoster in order to add new houses!";
+                TempData[ErrorMessage] = "You must become a hoster in order to add new events!";
 
                 return RedirectToAction("Become", "Hoster");
             }
@@ -132,9 +132,40 @@
 
                 return View(model);
             }
+        }
 
+        public async Task<IActionResult> Like(int id)
+        {
+            bool eventExists = await _eventService.ExistsByIdAsync(id);
 
+            if (!eventExists)
+            {
+                TempData[ErrorMessage] = "Event with the provided id does not exist!";
 
+                return RedirectToAction("All", "Event");
+            }
+
+            try
+            {
+                string userId = User.GetId();
+                await _eventService.LikeAsync(userId, id);
+
+                return RedirectToAction("Liked", "Event");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+
+                //return GeneralError();
+            }
+        }
+
+        public async Task<IActionResult> Liked()
+        {
+            string userId = User.GetId();
+            IEnumerable<EventAllViewModel> model = await _eventService.AllLiked(userId);
+
+            return View(model);
         }
 
     }

@@ -100,5 +100,48 @@
                 Events = allEvents
             };
         }
+
+        public async Task<bool> ExistsByIdAsync(int eventId)
+        {
+            return await _dbContext.Events.AnyAsync(e => e.Id == eventId);
+        }
+
+        public async Task LikeAsync(string userId, int eventId)
+        {
+            var user = await _dbContext.Users
+                .Include(u => u.LikedEvents)
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+            var likedEvent = await _dbContext.Events.FindAsync(eventId);
+
+            if (!user.LikedEvents.Contains(likedEvent))
+            {
+                user.LikedEvents.Add(likedEvent);
+                await _dbContext.SaveChangesAsync();
+            }
+
+        }
+
+        public async Task<IEnumerable<EventAllViewModel>> AllLiked(string userId)
+        {
+            var user = await _dbContext.Users
+                .Include(u =>u.LikedEvents)
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+            IEnumerable<EventAllViewModel> likedEvents = user
+                .LikedEvents
+                .Select(le => new EventAllViewModel
+                {
+                    Id = le.Id,
+                    Title = le.Title,
+                    Location = le.Location,
+                    DJ = le.DJ,
+                    EventDate = le.EventDate,
+                    PosterImagePath = le.PosterImagePath
+                })
+                .ToArray();
+
+            return likedEvents;
+        }
     }
 }

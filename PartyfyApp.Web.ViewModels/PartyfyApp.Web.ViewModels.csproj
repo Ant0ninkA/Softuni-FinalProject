@@ -15,8 +15,4 @@
     <ProjectReference Include="..\PartfyApp.Common\PartyfyApp.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Ticket\" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EventAllViewModel>
+
+@{
+    ViewBag.Title = "Liked Events";
+}
+
+<div class="container mt-5">
+    @if (!Model.Any())
+    {
+        <h2 class="text-center">You have not liked any events yet!</h2>
+    }
+
+    <div class="row">
+        @foreach (var currEvent in Model)
+        {
+            <partial name="_LikedPartial" model="@currEvent" />
+        }
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .event-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .event-poster img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .event-dj, .event-date {
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        .btn-primary {
+            background-color: #BF0065;
+            border-color: #BF0065;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #900048;
+            border-color: #900048;
+        }
+    </style>
+}
+
+
+

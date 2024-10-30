@@ -1,0 +1,46 @@
+﻿<div class="row mb-4 liked-event-card p-3">
+    <div class="col-md-3 event-poster">
+        <img src="@Url.Content(Model.PosterImagePath)" alt="Event Poster" class="img-fluid rounded shadow-sm" />
+    </div>
+    <div class="col-md-7 event-details d-flex flex-column justify-content-center">
+        <h4>@Model.Title</h4>
+        <p><strong>DJ:</strong> @Model.DJ</p>
+        <p><strong>Date:</strong> @Model.EventDate.ToString("MMM dd, yyyy")</p>
+    </div>
+    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+        <a asp-area="" asp-controller="Event" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary mb-2">Buy Ticket</a>
+    </div>
+</div>
+
+
+<style>
+    .liked-events-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+
+    .liked-event-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .event-poster img {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    .event-details {
+        padding-left: 15px;
+    }
+
+    .btn-primary {
+        background-color: #BF0065;
+        border-color: #BF0065;
+    }
+
+        .btn-primary:hover {
+            background-color: #a30055;
+        }
+</style>
