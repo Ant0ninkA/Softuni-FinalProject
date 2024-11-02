@@ -5,10 +5,12 @@
         <div class="col-md-8">
             @* Uncomment to display poster image *@
             @* <img src="@Url.Content(Model.PosterImagePath)" alt="@Model.Title" class="img-fluid rounded mb-3" /> *@
-            <h2 class="display-4" style="color: #BF0065">@Model.Title</h2>
-            <p class="text-muted"><strong>Date:</strong> @Model.EventDate.ToString("MMMM dd, yyyy")</p>
-            <p class="text-muted"><strong>Location:</strong> @Model.Location</p>
-            <p class="lead" style="color: #BF0065">@Model.Description</p>
+            <h2 class="display-4" style="color: #BF0065; font-weight: bold;">@Model.Title</h2>
+            <div class="bg-light p-3 rounded mb-3" style="border-left: 4px solid #BF0065;">
+                <p class="text-muted" style="font-weight: bold;"><strong>Date:</strong> @Model.EventDate.ToString("MMMM dd, yyyy")</p>
+                <p class="text-muted" style="font-weight: bold;"><strong>Location:</strong> @Model.Location</p>
+            </div>
+            <p class="lead" style="color: #BF0065; font-weight: 500;">@Model.Description</p>
         </div>
         <div class="col-md-4">
             <div class="card border-light mb-3" style="background-color: #970176; color: white;">
@@ -47,13 +49,12 @@
             <div class="d-flex mt-3">
                 @if (Model.IsLiked)
                 {
-                    <a asp-action="Unlike" asp-route-id="@Model.Id" class="btn btn-danger w-100" style="border-radius: 25px; font-size: 1.1rem; background-color: #970176; color: white;">
-                        <i class="fas fa-thumbs-down"></i> Unlike
-                    </a>
+                    <a asp-controller="Event" asp-action="Unlike" asp-route-id="@Model.Id" class="btn btn-danger w-100" style="border-radius: 25px; font-size: 1.1rem; background-color: #970176; color: white;">
+                        <i class="fas fa-thumbs-down"></i> Unlike </a>
                 }
                 else
                 {
-                    <a asp-action="Like" asp-route-id="@Model.Id" class="btn btn-primary w-100" style="border-radius: 25px; font-size: 1.1rem; background-color: #BF0065; color: white;">
+                    <a asp-controller="Event" asp-action="Like" asp-route-id="@Model.Id" class="btn btn-primary w-100" style="border-radius: 25px; font-size: 1.1rem; background-color: #BF0065; color: white;">
                         <i class="fas fa-heart"></i> Like
                     </a>
                 }
@@ -84,5 +85,11 @@
 
     .btn {
         border-radius: 25px; /* Rounded buttons */
+    }
+
+    /* Additional styling */
+    .bg-light {
+        background-color: #f8f9fa !important; /* Light background for information section */
+        border-radius: 10px; /* Rounded corners for the info section */
     }
 </style>

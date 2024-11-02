@@ -177,7 +177,7 @@
                 string userId = User.GetId();
                 await _eventService.UnlikeAsync(userId, id);
 
-                return RedirectToAction("Details", "Event");
+                return RedirectToAction("Liked", "Event");
             }
             catch (Exception)
             {

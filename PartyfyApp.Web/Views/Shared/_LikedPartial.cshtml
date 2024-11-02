@@ -7,8 +7,9 @@
         <p><strong>DJ:</strong> @Model.DJ</p>
         <p><strong>Date:</strong> @Model.EventDate.ToString("MMM dd, yyyy")</p>
     </div>
-    <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
-        <a asp-area="" asp-controller="Event" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary mb-2">Buy Ticket</a>
+    <div class="col-md-2 d-flex justify-content-center align-items-center">
+        <a asp-controller="Ticket" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary custom-button wider-button mr-2">Buy Ticket</a>
+        <a asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary custom-button">Details</a>
     </div>
 </div>
 
@@ -35,12 +36,25 @@
         padding-left: 15px;
     }
 
-    .btn-primary {
+    .custom-button {
         background-color: #BF0065;
         border-color: #BF0065;
+        color: white;
+        border-radius: 20px;
+        margin-right: 10px;
+        padding: 8px 13px;
+        transition: background-color 0.3s, transform 0.2s;
     }
 
-        .btn-primary:hover {
-            background-color: #a30055;
-        }
+     .custom-button:hover {
+         color: white;
+         background-color: #970176;
+         border-color: #970176;
+         transform: scale(1.05);
+     }
+
+     .wider-button{
+         min-width: 120px;
+     }
+
 </style>

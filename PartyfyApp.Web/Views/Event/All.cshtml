@@ -3,62 +3,6 @@
 @{
     ViewBag.Title = "All Events";
 }
-<style>
-    body {
-        color: #BF0065
-    }
-
-    .form-container {
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .custom-select, .custom-input {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        transition: border-color 0.3s;
-    }
-
-    .custom-button {
-        background-color: #BF0065;
-        border-color: #BF0065;
-        color: white;
-        margin-top: 10px;
-        padding: 8px 13px;
-        border-radius: 20px;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .custom-button:hover {
-         color: white;
-         background-color: #970176;
-         border-color: #970176;
-         transform: scale(1.05);
-    }
-
-    .pagination-btn {
-        color: white;
-        background-color: #BF0065;
-        border-radius: 20px; 
-        width: 45px;
-        height: 35px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border: none;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-</style>
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
@@ -96,7 +40,7 @@
 
         <div class="form-group col-md-3 d-flex align-items-center">
             <div class="form-group p-2">
-                <input type="submit" value="Search" class="custom-button" />
+                <input type="submit" value="Search" class="btn btn-primary custom-button" />
             </div>
         </div>
     </div>
@@ -149,6 +93,63 @@
            asp-route-sorting="@((int)Model.EventSorting)">>></a>
     </div>
 </div>
+
+<style>
+    body {
+        color: #BF0065
+    }
+
+    .form-container {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-select, .custom-input {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        transition: border-color 0.3s;
+    }
+
+    .custom-button {
+        background-color: #BF0065;
+        border-color: #BF0065;
+        color: white;
+        margin-top: 10px;
+        padding: 8px 13px;
+        border-radius: 20px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button:hover {
+            color: white;
+            background-color: #970176;
+            border-color: #970176;
+            transform: scale(1.05);
+        }
+
+    .pagination-btn {
+        color: white;
+        background-color: #BF0065;
+        border-radius: 20px;
+        width: 45px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+</style>
 
 
 

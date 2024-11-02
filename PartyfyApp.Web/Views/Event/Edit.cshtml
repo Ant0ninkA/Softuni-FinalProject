@@ -4,56 +4,58 @@
     ViewBag.Title = "Edit Event";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
-<hr />
+<div class="text-center mb-4" style="color: #BF0065;">
+    <h2>@ViewBag.Title</h2>
+    <hr style="border-color: #BF0065;" />
+</div>
 
-<div class="row">
-    <div class="col-lg-6 offset-lg-3">
-        <form asp-action="Edit" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="p-4" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="form-group mb-3">
+                <label asp-for="Title" class="form-label" style="color: #970176;"></label>
+                <input asp-for="Title" class="form-control" style="border-color: #BF0065;" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
+            <div class="form-group mb-3">
+                <label asp-for="Description" class="form-label" style="color: #970176;"></label>
+                <textarea asp-for="Description" class="form-control" style="border-color: #BF0065;"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Location"></label>
-                <input asp-for="Location" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="Location" class="form-label" style="color: #970176;"></label>
+                <input asp-for="Location" class="form-control" style="border-color: #BF0065;" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="DJ"></label>
-                <input asp-for="DJ" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="DJ" class="form-label" style="color: #970176;"></label>
+                <input asp-for="DJ" class="form-control" style="border-color: #BF0065;" />
                 <span asp-validation-for="DJ" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="EventDate"></label>
-                <input asp-for="EventDate" type="date" class="form-control" />
+            <div class="form-group mb-3">
+                <label asp-for="EventDate" class="form-label" style="color: #970176;"></label>
+                <input asp-for="EventDate" type="date" class="form-control" style="border-color: #BF0065;" />
                 <span asp-validation-for="EventDate" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="CategoryId">Event Category</label>
-                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"></select>
+            <div class="form-group mb-3">
+                <label asp-for="CategoryId" style="color: #970176;">Event Category</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" style="border-color: #BF0065;"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="PosterImage">Event Poster</label>
-                <input asp-for="PosterImage" type="file" class="form-control-file" />
+            <div class="form-group mb-3">
+                <label asp-for="PosterImage" style="color: #970176;">Event Poster</label>
+                <input asp-for="PosterImage" type="file" class="form-control-file" style="color: #BF0065;" />
                 <span asp-validation-for="PosterImage" class="text-danger"></span>
             </div>
 
-            <div class="form-group text-center">
-                <input type="submit" value="Edit" class="btn btn-primary mt-3" />
+            <div class="form-group text-center mt-4">
+                <input type="submit" value="Edit" class="btn btn-primary custom-button" />
             </div>
         </form>
     </div>
@@ -63,3 +65,29 @@
     <partial name="_ValidationScriptsPartial" />
 }
 
+<style>
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control {
+        border-radius: 6px;
+        padding: 10px;
+    }
+
+    .custom-button {
+        background-color: #BF0065;
+        border-color: #BF0065;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 30px;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+        .custom-button:hover {
+            color: white;
+            background-color: #970176;
+            border-color: #970176;
+            transform: scale(1.05);
+        }
+</style>
