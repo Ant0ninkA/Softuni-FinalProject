@@ -3,11 +3,14 @@
 @using PartyfyApp.Web.Infrastructure.Extensions
 
 @inject IHosterService _hosterService;
+@inject IEventService _eventService;
+@inject ITicketService _ticketService;
 
 @{
     string hosterId = await _hosterService.GetHosterIdAsync(User.GetId());
-    bool isUserHosterOfEvent = await _hosterService.HasEventWithId(hosterId, Model.Id);
+    bool isHosterOfEvent = await _hosterService.HasEventWithId(hosterId, Model.Id);
     bool isUserHoster = await _hosterService.HosterExistsByIdAsync(User.GetId());
+    int ticketsCount = await _eventService.GetTicketsCount(Model.Id);
 }
 
 <div class="col-md-4 col-sm-6 mb-4">
@@ -20,11 +23,15 @@
         </div>
         @if (User.Identity?.IsAuthenticated ?? false)
         {
-            @if ((isUserHoster && isUserHosterOfEvent) @* || User.IsAdmin() *@)
+            @if ((isUserHoster && isHosterOfEvent) @* || User.IsAdmin() *@)
             {
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <a class="btn btn-warning" asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    <button type="button" class="btn btn-primary open-modal" data-event-id="@Model.Id">Add Tickets</button>
+                    <button type="button" class="btn btn-warning open-modal"
+                            data-event-id="@Model.Id"
+                            data-tickets-count="@ticketsCount">
+                        @(ticketsCount > 0 ? "Edit Tickets" : "Add Tickets")
+                    </button>
                     <a class="ml-2 btn btn-danger" asp-controller="Event" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                 </div>
             }
@@ -35,24 +42,42 @@
                        class="btn like-btn like-button"><i class="fas fa-heart"></i> Like</a>
                     <a asp-area="" asp-controller="Event" asp-action="BuyTickets" asp-route-id="@Model.Id" method="post"
                        class="btn buy-tickets-btn"><i class="fas fa-ticket-alt"></i> Buy Ticket</a>
-                    <a asp-area="" asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn details-btn">Details</a>
+                    <a asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn details-btn">Details</a>
                 </div>
             }
         }
     </div>
 </div>
 
-<partial name="_AddTicketsModal" , model="new TicketFormViewModel() {EventId = Model.Id}"/>
-
 <script>
     $(document).ready(function () {
         $('.open-modal').on('click', function () {
             const eventId = $(this).data('event-id');
-            $('#addTicketsModal').find('#EventId').val(eventId);
-            $('#addTicketsModal').modal('show');
+            const ticketsCount = $(this).data('tickets-count');
+
+            if (ticketsCount > 0) {
+                $('#editTicketsModal').find('#EventId').val(eventId);
+                $('#editTicketsModal').modal('show');
+            } else {
+                $('#addTicketsModal').find('#EventId').val(eventId);
+                $('#addTicketsModal').modal('show');
+            }
         });
     });
 </script>
+
+
+@if (ticketsCount > 0)
+{
+    TicketFormViewModel model = await _ticketService.GetTicketsForEdit(Model.Id);
+    model.EventId = Model.Id;
+    <partial name="_EditTicketsModal" , model="model" />
+}
+else
+{
+    <partial name="_AddTicketsModal" , model="new TicketFormViewModel() {EventId = Model.Id}" />
+}
+
 
 <style>
     .event-card {

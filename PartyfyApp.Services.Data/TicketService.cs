@@ -1,4 +1,5 @@
-﻿using PartyfyApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PartyfyApp.Data;
 using PartyfyApp.Data.Models;
 using PartyfyApp.Services.Data.Interfaces;
 using PartyfyApp.Web.ViewModels.Ticket;
@@ -50,6 +51,38 @@ namespace PartyfyApp.Services.Data
                 .AddAsync(ticket);
 
             await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<TicketFormViewModel> GetTicketsForEdit(int eventId)
+        {
+            Ticket[] tickets = await _dbContext
+                .Tickets
+                .Where(t => t.EventId == eventId)
+                .ToArrayAsync();
+
+            TicketFormViewModel result = new TicketFormViewModel
+            {
+                VipPrice = tickets.Where(t => t.TicketTypeId == 1)
+                             .Select(t => (decimal?)t.Price)
+                             .FirstOrDefault() ?? 0m,
+                VipQuantity = tickets.Where(t => t.TicketTypeId == 1)
+                             .Select(t => (int?)t.Quantity)
+                             .FirstOrDefault() ?? 0,
+                StandardPrice = tickets.Where(t => t.TicketTypeId == 2)
+                             .Select(t => (decimal?)t.Price)
+                             .FirstOrDefault() ?? 0m,
+                StandardQuantity = tickets.Where(t => t.TicketTypeId == 2)
+                             .Select(t => (int?)t.Quantity)
+                             .FirstOrDefault() ?? 0,
+                StandingPrice = tickets.Where(t => t.TicketTypeId == 3)
+                             .Select(t => (decimal?)t.Price)
+                             .FirstOrDefault() ?? 0m,
+                StandingQuantity = tickets.Where(t => t.TicketTypeId == 3)
+                             .Select(t => (int?)t.Quantity)
+                             .FirstOrDefault() ?? 0
+            };
+
+            return result;
         }
     }
 }
