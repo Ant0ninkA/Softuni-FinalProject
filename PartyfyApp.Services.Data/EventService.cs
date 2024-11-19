@@ -19,6 +19,25 @@
         {
             _dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<UpcomingThreeViewModel>> UpcomingThreeEventsAsync()
+        {
+            IEnumerable<UpcomingThreeViewModel> upcomingThreeEvents = await _dbContext
+                .Events
+                .Where(e => e.Status)
+                .OrderBy(e => e.EventDate)
+                .Take(3)
+                .Select(e => new UpcomingThreeViewModel
+                {
+                    Id = e.Id,
+                    Title = e.Title,
+                    PosterImagePath = e.PosterImagePath
+                })
+                .ToArrayAsync();
+
+            return upcomingThreeEvents;
+        }
+
         public async Task AddAsync(string hosterId, EventFormViewModel model, string posterPath)
         {
             Event newEvent = new Event()

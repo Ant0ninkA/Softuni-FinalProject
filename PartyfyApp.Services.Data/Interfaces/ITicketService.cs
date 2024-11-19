@@ -4,8 +4,10 @@ namespace PartyfyApp.Services.Data.Interfaces
 {
     public interface ITicketService
     {
-        Task AddTickets(TicketFormViewModel model);
-        
+        Task AddTicketsAsync(TicketFormViewModel model);
+
+        Task EditTicketsAsync(TicketFormViewModel model);
+
         Task<TicketFormViewModel> GetTicketsForEdit(int eventId);
     }
 }

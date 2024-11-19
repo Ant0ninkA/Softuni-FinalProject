@@ -14,7 +14,14 @@
         }
 
         public async Task<IActionResult> Add(TicketFormViewModel model) {
-            await _ticketservice.AddTickets(model);
+            await _ticketservice.AddTicketsAsync(model);
+
+            return RedirectToAction("All", "Event");
+        }
+
+        public async Task<IActionResult> Edit(TicketFormViewModel model)
+        {
+            await _ticketservice.EditTicketsAsync(model);
 
             return RedirectToAction("All", "Event");
         }

@@ -5,6 +5,7 @@
     using PartyfyApp.Web.ViewModels.Event;
     public interface IEventService
     {
+        Task<IEnumerable<UpcomingThreeViewModel>> UpcomingThreeEventsAsync();
         Task AddAsync(string userId, EventFormViewModel model, string posterPath);
 
         Task<AllEventsFilteredAndPagedServiceModel> AllAsync(AllEventsQueryModel queryModel);

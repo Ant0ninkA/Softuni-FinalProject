@@ -28,7 +28,9 @@
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <a class="btn btn-warning" asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                     <button type="button" class="btn btn-warning open-modal"
+                            data-bs-toggle="modal"
                             data-event-id="@Model.Id"
+                            data-bs-target="#modal-@Model.Id"
                             data-tickets-count="@ticketsCount">
                         @(ticketsCount > 0 ? "Edit Tickets" : "Add Tickets")
                     </button>
@@ -49,6 +51,18 @@
     </div>
 </div>
 
+
+@if (ticketsCount > 0)
+{
+    TicketFormViewModel model = await _ticketService.GetTicketsForEdit(Model.Id);
+    model.EventId = Model.Id;
+    <partial name="_EditTicketsModal" , model="model" />
+}
+ else
+{
+    <partial name="_AddTicketsModal" , model="new TicketFormViewModel() {EventId = Model.Id}" />
+} 
+
 <script>
     $(document).ready(function () {
         $('.open-modal').on('click', function () {
@@ -65,19 +79,6 @@
         });
     });
 </script>
-
-
-@if (ticketsCount > 0)
-{
-    TicketFormViewModel model = await _ticketService.GetTicketsForEdit(Model.Id);
-    model.EventId = Model.Id;
-    <partial name="_EditTicketsModal" , model="model" />
-}
-else
-{
-    <partial name="_AddTicketsModal" , model="new TicketFormViewModel() {EventId = Model.Id}" />
-}
-
 
 <style>
     .event-card {

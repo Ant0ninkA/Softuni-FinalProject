@@ -10,7 +10,7 @@
     </div>
 
     <div class="center-box">
-        <button class="custom-button">UPCOMING EVENTS</button>
+        <a asp-controller="Home" asp-action="Upcoming" class="btn custom-button">UPCOMING EVENTS</a>
     </div>
 
     <div class="right-box">
@@ -67,6 +67,7 @@
 
         .custom-button:hover {
             background-color: #970176; 
+            color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); 
         }
