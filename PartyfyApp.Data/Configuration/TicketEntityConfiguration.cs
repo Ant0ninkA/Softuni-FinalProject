@@ -23,7 +23,7 @@
 
             builder
                 .HasMany(t => t.Buyers)
-                .WithMany(b => b.BuyedTickets)
+                .WithMany(b => b.Tickets)
                 .UsingEntity(tb => tb.ToTable("TicketsBuyers"));
 
             builder

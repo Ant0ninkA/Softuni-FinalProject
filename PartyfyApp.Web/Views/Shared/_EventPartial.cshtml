@@ -42,8 +42,12 @@
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <a asp-area="" asp-controller="Event" asp-action="Like" asp-route-id="@Model.Id"
                        class="btn like-btn like-button"><i class="fas fa-heart"></i> Like</a>
-                    <a asp-area="" asp-controller="Event" asp-action="BuyTickets" asp-route-id="@Model.Id" method="post"
-                       class="btn buy-tickets-btn"><i class="fas fa-ticket-alt"></i> Buy Ticket</a>
+                    <button type="button" class="btn buy-tickets-btn open-modal"
+                            data-bs-toggle="modal"
+                            data-event-id="@Model.Id"
+                            data-bs-target="#modal-@Model.Id">
+                           <i class="fas fa-ticket-alt"></i> Buy Ticket
+                    </button>
                     <a asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn details-btn">Details</a>
                 </div>
             }
@@ -51,10 +55,14 @@
     </div>
 </div>
 
-
-@if (ticketsCount > 0)
+@if (!(isUserHoster && isHosterOfEvent))
 {
-    TicketFormViewModel model = await _ticketService.GetTicketsForEdit(Model.Id);
+    TicketBuyViewModel model = await _ticketService.GetTicketsToBuyAsync(Model.Id);
+    <partial name="_BuyTicketsModal" , model="model" />
+}
+else if (ticketsCount > 0)
+{
+    TicketFormViewModel model = await _ticketService.GetTicketsForEditAsync(Model.Id);
     model.EventId = Model.Id;
     <partial name="_EditTicketsModal" , model="model" />
 }
@@ -62,23 +70,6 @@
 {
     <partial name="_AddTicketsModal" , model="new TicketFormViewModel() {EventId = Model.Id}" />
 } 
-
-<script>
-    $(document).ready(function () {
-        $('.open-modal').on('click', function () {
-            const eventId = $(this).data('event-id');
-            const ticketsCount = $(this).data('tickets-count');
-
-            if (ticketsCount > 0) {
-                $('#editTicketsModal').find('#EventId').val(eventId);
-                $('#editTicketsModal').modal('show');
-            } else {
-                $('#addTicketsModal').find('#EventId').val(eventId);
-                $('#addTicketsModal').modal('show');
-            }
-        });
-    });
-</script>
 
 <style>
     .event-card {

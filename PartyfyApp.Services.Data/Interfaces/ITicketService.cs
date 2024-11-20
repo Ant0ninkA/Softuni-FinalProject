@@ -8,6 +8,12 @@ namespace PartyfyApp.Services.Data.Interfaces
 
         Task EditTicketsAsync(TicketFormViewModel model);
 
-        Task<TicketFormViewModel> GetTicketsForEdit(int eventId);
+        Task<TicketFormViewModel> GetTicketsForEditAsync(int eventId);
+
+        Task<TicketBuyViewModel> GetTicketsToBuyAsync(int eventId);
+
+        Task BuyTicketsAsync(TicketBuyViewModel model, string userId);
+
+        Task<bool> EnoughTicketsAsync(TicketBuyViewModel model);
     }
 }

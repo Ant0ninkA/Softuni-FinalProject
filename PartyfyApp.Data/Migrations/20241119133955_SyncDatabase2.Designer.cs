@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PartyfyApp.Data;
 
@@ -11,9 +12,11 @@ using PartyfyApp.Data;
 namespace PartyfyApp.Data.Migrations
 {
     [DbContext(typeof(PartyfyAppDbContext))]
-    partial class PartyfyAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241119133955_SyncDatabase2")]
+    partial class SyncDatabase2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,15 +27,15 @@ namespace PartyfyApp.Data.Migrations
 
             modelBuilder.Entity("ApplicationUserTicket", b =>
                 {
+                    b.Property<Guid>("BuyedTicketsId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("BuyersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TicketsId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("BuyedTicketsId", "BuyersId");
 
-                    b.HasKey("BuyersId", "TicketsId");
-
-                    b.HasIndex("TicketsId");
+                    b.HasIndex("BuyersId");
 
                     b.ToTable("TicketsBuyers", (string)null);
                 });
@@ -348,7 +351,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1652),
+                            CreatedOn = new DateTime(2024, 11, 19, 13, 39, 55, 25, DateTimeKind.Utc).AddTicks(3707),
                             DJ = "COZTOF",
                             Description = "This season is centred around what we want to see more, it's all about the deep connection with the subconscious and the city that made us, the true urban jungle that we all want to be part of each and every week!",
                             EventDate = new DateTime(2024, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -362,7 +365,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 5,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1676),
+                            CreatedOn = new DateTime(2024, 11, 19, 13, 39, 55, 25, DateTimeKind.Utc).AddTicks(3734),
                             DJ = "Pandora MC Bram",
                             Description = "Feel the heat with the best Latin music, from sensual salsa to reggaeton beats that will keep you dancing all night long. Whether you're a seasoned dancer or just looking to have a great time, our DJ will spin the hottest tracks to make sure the energy never stops!",
                             EventDate = new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -376,7 +379,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1683),
+                            CreatedOn = new DateTime(2024, 11, 19, 13, 39, 55, 25, DateTimeKind.Utc).AddTicks(3741),
                             DJ = "Groky",
                             Description = "Our world-class DJ lineup will take you on an intense sonic journey with hard-hitting bass, hypnotic melodies, and deep, driving rhythms that will make you lose yourself on the dance floor. This is where the music speaks, and the crowd moves as one.",
                             EventDate = new DateTime(2025, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -438,7 +441,7 @@ namespace PartyfyApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5b410919-3bc9-443f-af28-9b373bc589b6"),
+                            Id = new Guid("00eb2769-dd92-4eb7-9f74-e66ca3c8bcdf"),
                             EventId = 1,
                             Price = 20.0m,
                             Quantity = 400,
@@ -446,7 +449,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1d1cea2c-f8bc-4f6a-a0f9-17aff431c1c0"),
+                            Id = new Guid("9672c3be-7b78-4b0b-bd2d-ad03a0ec31ec"),
                             EventId = 2,
                             Price = 50.0m,
                             Quantity = 30,
@@ -454,7 +457,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("02f15383-d8c6-45f7-b3a8-9d42e0fd7457"),
+                            Id = new Guid("7de4d3d1-8711-4ea5-9e0f-5f1c55d64cf8"),
                             EventId = 2,
                             Price = 30.0m,
                             Quantity = 100,
@@ -462,7 +465,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7e95c2f1-50e6-4ff3-b4db-822ca154baf6"),
+                            Id = new Guid("a37df619-d35a-4e6a-b652-282ae3b4b83b"),
                             EventId = 3,
                             Price = 80.0m,
                             Quantity = 45,
@@ -470,7 +473,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b81d7141-6c71-442c-9706-20977f4fbffa"),
+                            Id = new Guid("2ed5a555-1e0f-436c-ae34-0e68100bad9f"),
                             EventId = 3,
                             Price = 50.0m,
                             Quantity = 200,
@@ -478,7 +481,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("083d31e3-0b72-4817-b325-ef7dfd8590c9"),
+                            Id = new Guid("4002da19-ef15-40f0-8c88-7cfd0423de1c"),
                             EventId = 3,
                             Price = 20.0m,
                             Quantity = 200,
@@ -523,15 +526,15 @@ namespace PartyfyApp.Data.Migrations
 
             modelBuilder.Entity("ApplicationUserTicket", b =>
                 {
-                    b.HasOne("PartyfyApp.Data.Models.ApplicationUser", null)
+                    b.HasOne("PartyfyApp.Data.Models.Ticket", null)
                         .WithMany()
-                        .HasForeignKey("BuyersId")
+                        .HasForeignKey("BuyedTicketsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PartyfyApp.Data.Models.Ticket", null)
+                    b.HasOne("PartyfyApp.Data.Models.ApplicationUser", null)
                         .WithMany()
-                        .HasForeignKey("TicketsId")
+                        .HasForeignKey("BuyersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

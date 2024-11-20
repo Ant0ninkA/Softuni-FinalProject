@@ -54,6 +54,31 @@ namespace PartyfyApp.Services.Data
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task BuyTicketsAsync(TicketBuyViewModel model, string userId)
+        {
+            Ticket[] tickets = await _dbContext
+                .Tickets
+                .Where(t => t.EventId == model.EventId)
+                .ToArrayAsync();
+
+            Ticket chosenTicket = tickets
+                .First(t => t.TicketTypeId == model.SelectedTicketTypeId);
+
+            chosenTicket.Quantity -= model.QuantityToBuy;
+
+            var user = await _dbContext.Users
+                .Include(u => u.Tickets)
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+            foreach (var ticket in tickets)
+            {
+                user.Tickets.Add(ticket);
+                ticket.Buyers.Add(user);
+            }
+
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task EditTicketsAsync(TicketFormViewModel model)
         {
             Ticket[] tickets = await _dbContext.Tickets
@@ -126,7 +151,21 @@ namespace PartyfyApp.Services.Data
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<TicketFormViewModel> GetTicketsForEdit(int eventId)
+        public async Task<bool> EnoughTicketsAsync(TicketBuyViewModel model)
+        {
+            var tickets = await _dbContext
+                .Tickets
+                .Where(t => t.EventId == model.EventId)
+                .ToArrayAsync();
+
+            var chosenTicket = tickets
+                .Where(t => t.TicketTypeId == model.SelectedTicketTypeId)
+                .FirstOrDefault();
+
+            return chosenTicket.Quantity >= model.QuantityToBuy;
+        }
+
+        public async Task<TicketFormViewModel> GetTicketsForEditAsync(int eventId)
         {
             Ticket[] tickets = await _dbContext
                 .Tickets
@@ -156,6 +195,28 @@ namespace PartyfyApp.Services.Data
             };
 
             return result;
+        }
+
+        public async Task<TicketBuyViewModel> GetTicketsToBuyAsync(int eventId)
+        {
+            List<TicketOptionViewModel> tickets = await _dbContext.Tickets
+                 .Where(t => t.EventId == eventId && t.Quantity > 0)
+                 .Select(t => new TicketOptionViewModel
+                 {
+                     TicketTypeId = t.TicketTypeId,
+                     TicketType = t.TicketType.Type,
+                     Price = t.Price,
+                     Quantity = t.Quantity,
+                 })
+                 .ToListAsync();
+
+            TicketBuyViewModel model = new TicketBuyViewModel()
+            {
+                EventId = eventId,
+                Tickets = tickets
+            };
+
+            return model;
         }
     }
 }

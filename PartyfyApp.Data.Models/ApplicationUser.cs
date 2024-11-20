@@ -6,11 +6,11 @@
         public ApplicationUser()
         {
             this.LikedEvents = new HashSet<Event>();
-            this.BuyedTickets = new HashSet<Ticket>();
+            this.Tickets = new HashSet<Ticket>();
         }
 
         public virtual ICollection<Event> LikedEvents { get; set; }
-        public virtual ICollection<Ticket> BuyedTickets { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
 
 
