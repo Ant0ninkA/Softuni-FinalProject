@@ -192,6 +192,20 @@ namespace PartyfyApp.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasDefaultValue("Test");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)")
+                        .HasDefaultValue("Testov");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -348,7 +362,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 4,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1652),
+                            CreatedOn = new DateTime(2024, 11, 20, 15, 30, 51, 328, DateTimeKind.Utc).AddTicks(5248),
                             DJ = "COZTOF",
                             Description = "This season is centred around what we want to see more, it's all about the deep connection with the subconscious and the city that made us, the true urban jungle that we all want to be part of each and every week!",
                             EventDate = new DateTime(2024, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -362,7 +376,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 5,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1676),
+                            CreatedOn = new DateTime(2024, 11, 20, 15, 30, 51, 328, DateTimeKind.Utc).AddTicks(5276),
                             DJ = "Pandora MC Bram",
                             Description = "Feel the heat with the best Latin music, from sensual salsa to reggaeton beats that will keep you dancing all night long. Whether you're a seasoned dancer or just looking to have a great time, our DJ will spin the hottest tracks to make sure the energy never stops!",
                             EventDate = new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -376,7 +390,7 @@ namespace PartyfyApp.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2024, 11, 20, 13, 42, 0, 349, DateTimeKind.Utc).AddTicks(1683),
+                            CreatedOn = new DateTime(2024, 11, 20, 15, 30, 51, 328, DateTimeKind.Utc).AddTicks(5282),
                             DJ = "Groky",
                             Description = "Our world-class DJ lineup will take you on an intense sonic journey with hard-hitting bass, hypnotic melodies, and deep, driving rhythms that will make you lose yourself on the dance floor. This is where the music speaks, and the crowd moves as one.",
                             EventDate = new DateTime(2025, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -438,7 +452,7 @@ namespace PartyfyApp.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5b410919-3bc9-443f-af28-9b373bc589b6"),
+                            Id = new Guid("add45df3-d88d-47b4-b526-ba683e078cf1"),
                             EventId = 1,
                             Price = 20.0m,
                             Quantity = 400,
@@ -446,7 +460,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1d1cea2c-f8bc-4f6a-a0f9-17aff431c1c0"),
+                            Id = new Guid("a4f5a2e1-7ae5-4fc3-9019-9e07acdeb3dd"),
                             EventId = 2,
                             Price = 50.0m,
                             Quantity = 30,
@@ -454,7 +468,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("02f15383-d8c6-45f7-b3a8-9d42e0fd7457"),
+                            Id = new Guid("6bee97c8-890b-4a9e-ac0b-3ef17c447b74"),
                             EventId = 2,
                             Price = 30.0m,
                             Quantity = 100,
@@ -462,7 +476,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7e95c2f1-50e6-4ff3-b4db-822ca154baf6"),
+                            Id = new Guid("d3ac72e7-2c17-456c-aec1-0493395377e5"),
                             EventId = 3,
                             Price = 80.0m,
                             Quantity = 45,
@@ -470,7 +484,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b81d7141-6c71-442c-9706-20977f4fbffa"),
+                            Id = new Guid("ec8ed61e-1de4-476d-907f-661ff6402f98"),
                             EventId = 3,
                             Price = 50.0m,
                             Quantity = 200,
@@ -478,7 +492,7 @@ namespace PartyfyApp.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("083d31e3-0b72-4817-b325-ef7dfd8590c9"),
+                            Id = new Guid("869d007d-04c4-4c1d-84d3-20f80806fa02"),
                             EventId = 3,
                             Price = 20.0m,
                             Quantity = 200,

@@ -1,4 +1,7 @@
-﻿<div class="row mb-4 liked-event-card p-3">
+﻿@using PartyfyApp.Services.Data.Interfaces
+@inject ITicketService _ticketService;
+
+<div class="row mb-4 liked-event-card p-3">
     <div class="col-md-3 event-poster">
         <img src="@Url.Content(Model.PosterImagePath)" alt="Event Poster" class="img-fluid rounded shadow-sm" />
     </div>
@@ -8,11 +11,19 @@
         <p><strong>Date:</strong> @Model.EventDate.ToString("MMM dd, yyyy")</p>
     </div>
     <div class="col-md-2 d-flex justify-content-center align-items-center">
-        <a asp-controller="Ticket" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary custom-button wider-button mr-2">Buy Ticket</a>
-        <a asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary custom-button">Details</a>
+       @*  <a asp-controller="Ticket" asp-action="Buy" asp-route-id="@Model.Id" class="btn btn-primary custom-button wider-button mr-2">Buy Ticket</a> *@
+        <button type="button" class="btn custom-button wider-button mr-2"
+                data-bs-toggle="modal"
+                data-event-id="@Model.Id"
+                data-bs-target="#modal-@Model.Id">Buy Ticket</button>
+        <a asp-controller="Event" asp-action="Details" asp-route-id="@Model.Id" class="btn custom-button">Details</a>
     </div>
 </div>
 
+@{
+     TicketBuyViewModel model = await _ticketService.GetTicketsToBuyAsync(Model.Id);
+}
+<partial name="_BuyTicketsModal" , model="model" />
 
 <style>
     .liked-events-container {
@@ -52,6 +63,11 @@
          border-color: #970176;
          transform: scale(1.05);
      }
+
+    .custom-button:focus {
+        outline: none;
+         
+    }
 
      .wider-button{
          min-width: 120px;
