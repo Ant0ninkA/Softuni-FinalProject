@@ -4,6 +4,7 @@ using PartyfyApp.Data;
 using PartyfyApp.Data.Models;
 using PartyfyApp.Services.Data.Interfaces;
 using PartyfyApp.Web.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 internal class Program
 {
