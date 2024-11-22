@@ -31,6 +31,11 @@ internal class Program
 
         builder.Services.AddApplicationServices(typeof(IEventService));
 
+        builder.Services.ConfigureApplicationCookie(cfg =>
+        {
+            cfg.LoginPath = "/User/Login";
+        });
+
         builder.Services.AddControllersWithViews();
 
         builder.Services.ConfigureApplicationCookie(options =>

@@ -1,1 +1,143 @@
-﻿
+﻿@model LoginFormViewModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h1 class="text-center" style="margin-bottom: 5px">@ViewData["Title"]</h1>
+<div class="row">
+    <div class="col-md-4">
+        <section>
+            <form id="account" method="post" style="margin-top: 5px" >
+                <h2>Use a local account to log in.</h2>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-2">
+                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-2">
+                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="password" />
+                    <label asp-for="Password" class="form-label">Password</label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="checkbox mb-2">
+                    <label asp-for="RememberMe" class="form-label">
+                        <input class="form-check-input" asp-for="RememberMe" />
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+                <div>
+                    <button id="login-submit" type="submit" class="w-100">Log in</button>
+                </div>
+                <div>
+                    <p class="align-items-center">
+                        <a asp-controller="User" aps-action="Register">Register as a new user</a>
+                    </p>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin-right: 70px;
+        margin-left: 70px;
+        margin-top: -70px;
+    }
+
+    form {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 25px 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+        text-align: center;
+        color: #BF0065;
+        font-weight: bold;
+    }
+
+    .form-floating {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    input.form-control {
+        border: 1px solid #BF0065;
+        border-radius: 5px;
+        height: 30px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 16px;
+    }
+
+    input:focus {
+        border-color: #970176;
+        outline: none;
+        box-shadow: 0 0 5px rgba(151, 1, 118, 0.5);
+    }
+
+    label {
+        color: #555;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    input:focus + label {
+        color: #970176;
+        font-weight: bold;
+    }
+
+    .text-danger {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    button {
+        background-color: #BF0065;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 18px;
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #970176;
+        cursor: pointer;
+    }
+
+
+    media (max-width: 800px) {
+        form
+    {
+        width: 90%;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

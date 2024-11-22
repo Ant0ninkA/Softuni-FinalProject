@@ -1,10 +1,12 @@
 ﻿namespace PartyfyApp.Web.Controllers
 {
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
 
-using PartyfyApp.Data.Models;
+    using PartyfyApp.Data.Models;
     using PartyfyApp.Web.ViewModels.User;
+    using static PartyfyApp.Common.NotificationMessagesConstants;
 
     public class UserController : Controller
     {
@@ -58,13 +60,37 @@ using PartyfyApp.Data.Models;
             return RedirectToAction("Index", "Home");
         }
 
-    }
-
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login(string? returnUrl = null)
         {
-            return View();
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            LoginFormViewModel model = new LoginFormViewModel()
+            {
+                ReturnUrl = returnUrl,
+            };
+            return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var res = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+            if (!res.Succeeded)
+            {
+                TempData[ErrorMessage] = "There was an error while logging you in. Please try later or contact administrator!";
+
+                return View(model);
+            }
+
+            return Redirect(model.ReturnUrl ?? "/Home/Index");
+        }
     }
+
 }
