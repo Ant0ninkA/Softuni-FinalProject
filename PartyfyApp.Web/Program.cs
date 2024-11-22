@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 using PartyfyApp.Data;
 using PartyfyApp.Data.Models;
 using PartyfyApp.Services.Data.Interfaces;
 using PartyfyApp.Web.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Identity;
+using static PartyfyApp.Common.GeneralApplicationConstants;
 
 internal class Program
 {
@@ -27,6 +28,7 @@ internal class Program
             options.Password.RequireLowercase = builder.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
             options.Password.RequiredLength = builder.Configuration.GetValue<int>("Identity:Password:RequiredLength");
         })
+            .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<PartyfyAppDbContext>();
 
         builder.Services.AddApplicationServices(typeof(IEventService));
@@ -66,6 +68,8 @@ internal class Program
 
         app.UseAuthentication();
         app.UseAuthorization();
+
+        app.SeedAdministrator(DevelopmentAdminEmail);
 
         app.MapDefaultControllerRoute();
         app.MapRazorPages();
