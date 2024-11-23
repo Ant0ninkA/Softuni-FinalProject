@@ -10,6 +10,7 @@
     using PartyfyApp.Web.ViewModels.Event;
     using PartyfyApp.Web.ViewModels.Event.Enum;
     using PartyfyApp.Data.Models;
+    using PartyfyApp.Services.Mapping;
 
     public class EventService : IEventService
     {
@@ -27,12 +28,7 @@
                 .Where(e => e.Status)
                 .OrderBy(e => e.EventDate)
                 .Take(3)
-                .Select(e => new UpcomingThreeViewModel
-                {
-                    Id = e.Id,
-                    Title = e.Title,
-                    PosterImagePath = e.PosterImagePath
-                })
+                .To<UpcomingThreeViewModel>()
                 .ToArrayAsync();
 
             return upcomingThreeEvents;

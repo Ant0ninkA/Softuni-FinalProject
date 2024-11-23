@@ -1,10 +1,15 @@
+using System.Reflection;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 using PartyfyApp.Data;
 using PartyfyApp.Data.Models;
-using PartyfyApp.Services.Data.Interfaces;
+using PartyfyApp.Web.ViewModels;
 using PartyfyApp.Web.Infrastructure.Extensions;
+using PartyfyApp.Services.Data.Interfaces;
+using PartyfyApp.Services.Mapping;
+
 using static PartyfyApp.Common.GeneralApplicationConstants;
 
 internal class Program
@@ -47,6 +52,9 @@ internal class Program
         });
 
         WebApplication app = builder.Build();
+
+        AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

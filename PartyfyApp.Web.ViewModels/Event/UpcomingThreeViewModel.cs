@@ -1,6 +1,8 @@
 ﻿namespace PartyfyApp.Web.ViewModels.Event
 { 
-     public class UpcomingThreeViewModel
+     using PartyfyApp.Services.Mapping;
+     using PartyfyApp.Data.Models;
+     public class UpcomingThreeViewModel : IMapFrom<Event>
      {
          public int Id { get; set; }
 

@@ -1,8 +1,10 @@
-﻿using PartyfyApp.Web.ViewModels.Ticket;
-using System.ComponentModel.DataAnnotations;
-
-namespace PartyfyApp.Web.ViewModels.Event
+﻿namespace PartyfyApp.Web.ViewModels.Event
 {
+    using System.ComponentModel.DataAnnotations;
+
+   
+    using PartyfyApp.Web.ViewModels.Ticket;
+
     public class EventAllViewModel
     {
         public int Id { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PartyfyApp.Data;
 using PartyfyApp.Services.Data.Interfaces;
+using PartyfyApp.Services.Mapping;
 using PartyfyApp.Web.ViewModels.Category;
 
 namespace PartyfyApp.Services.Data
@@ -17,11 +18,7 @@ namespace PartyfyApp.Services.Data
         {
             IEnumerable<EventSelectCategoryViewModel> categories =
                 await _dbContext.Categories
-                .Select(c => new EventSelectCategoryViewModel()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                })
+                .To<EventSelectCategoryViewModel>()
                 .ToArrayAsync();
 
             return categories;

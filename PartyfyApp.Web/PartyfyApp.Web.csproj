@@ -27,6 +27,7 @@
     <ProjectReference Include="..\PartyfyApp.Data.Models\PartyfyApp.Data.Models.csproj" />
     <ProjectReference Include="..\PartyfyApp.Data\PartyfyApp.Data.csproj" />
     <ProjectReference Include="..\PartyfyApp.Services.Data\PartyfyApp.Services.Data.csproj" />
+    <ProjectReference Include="..\PartyfyApp.Services.Mapping\PartyfyApp.Services.Mapping.csproj" />
     <ProjectReference Include="..\PartyfyApp.Web.Infrastructor\PartyfyApp.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\PartyfyApp.Web.ViewModels\PartyfyApp.Web.ViewModels.csproj" />
   </ItemGroup>
