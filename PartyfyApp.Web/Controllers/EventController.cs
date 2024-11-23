@@ -2,12 +2,11 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using PartfyApp.Services.Data.Models.Event;
-    using PartyfyApp.Data.Models;
-    using PartyfyApp.Services.Data;
+
     using PartyfyApp.Services.Data.Interfaces;
-    using PartyfyApp.Web.Infrastructure.Extensions;
+    using PartfyApp.Services.Data.Models.Event;
     using PartyfyApp.Web.ViewModels.Event;
+    using PartyfyApp.Web.Infrastructure.Extensions;
     using static PartyfyApp.Common.NotificationMessagesConstants;
 
     [Authorize]
@@ -239,7 +238,7 @@
 
             bool isUserHoster = await _hosterService
                 .HosterExistsByIdAsync(User.GetId()!);
-            if (!isUserHoster  /*&& !User.IsAdmin()*/)
+            if (!isUserHoster  && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must become a hoster in order to edit event info!";
 
@@ -250,7 +249,7 @@
                 await _hosterService.GetHosterIdAsync(User.GetId()!);
             bool isHosterOfEvent = await _hosterService
                 .HasEventWithId(hosterId, id);
-            if (!isHosterOfEvent /*&& !User.IsAdmin()*/)
+            if (!isHosterOfEvent && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must be the hoster of the event you want to edit!";
 
@@ -296,7 +295,7 @@
 
             bool isUserHoster = await _hosterService
                 .HosterExistsByIdAsync(User.GetId()!);
-            if (!isUserHoster  /*&& !User.IsAdmin()*/)
+            if (!isUserHoster  && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must become a hoster in order to edit event info!";
 
@@ -307,7 +306,7 @@
                 await _hosterService.GetHosterIdAsync(User.GetId()!);
             bool isHosterOfEvent = await _hosterService
                 .HasEventWithId(hosterId, id);
-            if (!isHosterOfEvent /*&& !User.IsAdmin()*/)
+            if (!isHosterOfEvent && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must be the hoster of the event you want to edit!";
 
@@ -368,7 +367,7 @@
 
             bool isUserHoster = await _hosterService
                 .HosterExistsByIdAsync(User.GetId()!);
-            if (!isUserHoster  /*&& !User.IsAdmin()*/)
+            if (!isUserHoster  && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must become a hoster in order to delete an event!";
 
@@ -379,7 +378,7 @@
                 await _hosterService.GetHosterIdAsync(User.GetId()!);
             bool isHosterOfEvent = await _hosterService
                 .HasEventWithId(hosterId, id);
-            if (!isHosterOfEvent /*&& !User.IsAdmin()*/)
+            if (!isHosterOfEvent && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must be the hoster of the event you want to delete!";
 
@@ -417,7 +416,7 @@
 
             bool isUserHoster = await _hosterService
                 .HosterExistsByIdAsync(User.GetId()!);
-            if (!isUserHoster  /*&& !User.IsAdmin()*/)
+            if (!isUserHoster  && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must become a hoster in order to delete an event!";
 
@@ -428,7 +427,7 @@
                 await _hosterService.GetHosterIdAsync(User.GetId()!);
             bool isHosterOfEvent = await _hosterService
                 .HasEventWithId(hosterId, id);
-            if (!isHosterOfEvent /*&& !User.IsAdmin()*/)
+            if (!isHosterOfEvent && !User.IsAdmin())
             {
                 TempData[ErrorMessage] = "You must be the hoster of the event you want to delete!";
 

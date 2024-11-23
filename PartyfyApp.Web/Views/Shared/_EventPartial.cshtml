@@ -23,7 +23,7 @@
         </div>
         @if (User.Identity?.IsAuthenticated ?? false)
         {
-            @if ((isUserHoster && isHosterOfEvent) @* || User.IsAdmin() *@)
+            @if ((isUserHoster && isHosterOfEvent) || User.IsAdmin())
             {
                 <div class="mt-auto d-flex justify-content-between align-items-center">
                     <a class="btn btn-warning" asp-controller="Event" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
