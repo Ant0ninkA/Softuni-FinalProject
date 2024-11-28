@@ -15,5 +15,7 @@ namespace PartyfyApp.Services.Data.Interfaces
         Task BuyTicketsAsync(TicketBuyViewModel model, string userId);
 
         Task<bool> EnoughTicketsAsync(TicketBuyViewModel model);
+
+        Task<IEnumerable<UserTicketViewModel>> GetTicketsByUserAsync(string userId);
     }
 }

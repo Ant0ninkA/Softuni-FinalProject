@@ -56,7 +56,6 @@ internal class Program
         AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
 
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseMigrationsEndPoint();
@@ -64,7 +63,9 @@ internal class Program
         }
         else
         {
-            app.UseExceptionHandler("/Home/Error");
+            app.UseExceptionHandler("/Home/Error/500");
+
+            app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 
             app.UseHsts();
         }
@@ -74,13 +75,34 @@ internal class Program
 
         app.UseRouting();
 
+        app.UseResponseCaching();
+
+        app.UseCookiePolicy();
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.SeedAdministrator(DevelopmentAdminEmail);
+        if (app.Environment.IsDevelopment())
+        {
+            app.SeedAdministrator(DevelopmentAdminEmail);
 
-        app.MapDefaultControllerRoute();
-        app.MapRazorPages();
+        }
+
+        app.UseEndpoints(config =>
+        {
+            config.MapControllerRoute(
+                name: "areas",
+                pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
+
+            //config.MapControllerRoute(
+            //    name: "ProtectingUrlRoute",
+            //    pattern: "/{controller}/{action}/{id}/{information}",
+            //    defaults: new { Controller = "Category", Action = "Details" });
+
+            config.MapDefaultControllerRoute();
+
+            config.MapRazorPages();
+        });
 
         app.Run();
     }

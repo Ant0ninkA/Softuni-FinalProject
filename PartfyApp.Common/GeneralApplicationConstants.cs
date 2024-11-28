@@ -6,6 +6,8 @@
         public const int CurrentPageByDefault = 1;
         public const int EventsPerPageByDefault = 3;
 
+
+        public const string AdminAreaName = "Admin";
         public const string AdminRoleName = "Administrator";
         public const string DevelopmentAdminEmail = "admin@partyfyapp.bg";
 

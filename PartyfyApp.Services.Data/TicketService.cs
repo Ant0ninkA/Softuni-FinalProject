@@ -134,7 +134,7 @@ namespace PartyfyApp.Services.Data
             if (ticket != null)
             {
                 ticket.Price = model.StandingPrice;
-                ticket.Quantity = model.StandardQuantity;
+                ticket.Quantity = model.StandingQuantity;
             }
             else
             {
@@ -163,6 +163,35 @@ namespace PartyfyApp.Services.Data
                 .FirstOrDefault();
 
             return chosenTicket.Quantity >= model.QuantityToBuy;
+        }
+
+        public async Task<IEnumerable<UserTicketViewModel>> GetTicketsByUserAsync(string userId)
+        {
+            ApplicationUser user = await _dbContext
+                .Users
+                .Include(u => u.Tickets)
+                .ThenInclude(t => t.Event)
+                .Include(u => u.Tickets)
+                .ThenInclude(t => t.TicketType)
+                .FirstAsync(u => u.Id.ToString() == userId);
+
+            if (user == null || user.Tickets == null || !user.Tickets.Any())
+            {
+                return Enumerable.Empty<UserTicketViewModel>();
+            }
+
+            IEnumerable<UserTicketViewModel> tickets = user
+                .Tickets
+                .Select(t => new UserTicketViewModel
+                {
+                    EventTitle = t.Event.Title,
+                    EventDate = t.Event.EventDate,
+                    TicketType = t.TicketType.Type,
+                    TicketId = t.Id
+                })
+                .ToArray();
+
+            return tickets;
         }
 
         public async Task<TicketFormViewModel> GetTicketsForEditAsync(int eventId)

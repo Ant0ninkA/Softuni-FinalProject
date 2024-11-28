@@ -1,0 +1,90 @@
+﻿@model IEnumerable<UserTicketViewModel>
+
+<h1 class="text-center">My Tickets</h1>
+@if (!Model.Any())
+{
+    <h2 class="text-center">You have not bought any tickets yet!</h2>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (var ticket in Model)
+        {
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5>@ticket.EventTitle</h5>
+                        <p>@ticket.EventDate.ToString("g")</p>
+                    </div>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ticketModal"
+                            data-ticket-id="@ticket.TicketId"
+                            data-ticket-type="@ticket.TicketType">
+                        View Details
+                    </button>
+                </div>
+            </li>
+        }
+    </ul>
+}
+
+<div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ticketModalLabel">Ticket Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ticket Type: <span id="ticketType"></span></p>
+                <div id="qrCode"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+<script>
+    var ticketModal = document.getElementById('ticketModal');
+    ticketModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var ticketType = button.getAttribute('data-ticket-type');
+        var ticketId = button.getAttribute('data-ticket-id');
+
+        document.getElementById('ticketType').textContent = ticketType;
+
+        var qrContainer = document.getElementById('qrCode');
+        qrContainer.innerHTML = '';
+
+        var qr = new QRious({
+            value: ticketId,
+            size: 150
+        });
+
+        qrContainer.appendChild(qr.canvas);
+    });
+</script>
+
+<style>
+    .list-group-item {
+        border: 1px solid #BF0065;
+        margin-bottom: 10px;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .btn-primary {
+        background-color: #BF0065;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #970176;
+        }
+
+    .modal-content {
+        border-radius: 10px;
+        padding: 20px;
+    }
+</style>
+
+

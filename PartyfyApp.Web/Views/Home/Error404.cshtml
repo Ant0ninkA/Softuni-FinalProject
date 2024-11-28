@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "404 - Page Not Found";
+}
+
+<div class="error-wrapper">
+    <div class="error-content">
+        <h1>404</h1>
+        <p class="error-message">Oops! The page you’re looking for doesn’t exist.</p>
+        <a href="/" class="home-link">Return to Home</a>
+        <p class="error-support">Need help? <a href="/support">Contact support</a>.</p>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f8;
+        color: #2c2c2c;
+        margin: 0;
+        padding: 0;
+    }
+
+    .error-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .error-content {
+        max-width: 450px;
+        padding: 10px 20px;
+    }
+
+    h1 {
+        font-size: 64px;
+        color: #BF0065;
+        margin: 0;
+    }
+
+    .error-message {
+        font-size: 16px;
+        color: #555;
+        margin: 15px 0;
+    }
+
+    .home-link {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 15px;
+        background-color: #BF0065;
+        color: white;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .home-link:hover {
+        background-color: #970176;
+    }
+
+    .error-support {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #666;
+    }
+
+    .error-support a {
+        color: #BF0065;
+        text-decoration: none;
+    }
+
+    .error-support a:hover {
+        text-decoration: underline;
+    }
+</style>

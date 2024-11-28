@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Something Went Wrong";
+}
+
+<div class="error-wrapper">
+    <div class="error-content">
+        <h1>Oops!</h1>
+        <p class="error-message">Something went wrong on our end. We're already working on fixing it!</p>
+        <p class="error-suggestion">In the meantime, you can:</p>
+        <ul class="error-options">
+            <li><a href="/">Go back to the homepage</a></li>
+            <li><a href="/contact">Contact our support team</a></li>
+        </ul>
+        <p class="error-apology">We apologize for the inconvenience. Thanks for your patience!</p>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f9f9fb;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    .error-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+    }
+
+    .error-content {
+        max-width: 500px;
+        padding: 20px;
+        background-color: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 48px;
+        color: #BF0065;
+        margin-bottom: 15px;
+    }
+
+    .error-message {
+        font-size: 18px;
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .error-suggestion {
+        font-size: 16px;
+        margin: 20px 0 10px;
+        color: #333;
+    }
+
+    .error-options {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 0 20px;
+    }
+
+    .error-options li {
+        margin: 10px 0;
+    }
+    
+    .error-options a {
+        text-decoration: none;
+        color: #BF0065;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    .error-options a:hover {
+        color: #970176;
+    }
+
+    .error-apology {
+        font-size: 14px;
+        color: #666;
+    }
+</style>
+
