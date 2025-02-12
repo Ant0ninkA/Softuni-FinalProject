@@ -1,0 +1,13 @@
+﻿@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<h1>Admin Dashboard</h1>
+<p>Welcome to the Admin Area!</p>
+
+<ul>
+    <li><a asp-area="Admin" asp-controller="User" asp-action="Index">Manage Users</a></li>
+    <li><a asp-area="Admin" asp-controller="Event" asp-action="Index">Manage Events</a></li>
+    <li><a asp-area="Admin" asp-controller="Notification" asp-action="Index">Manage Notifications</a></li>
+</ul>
+

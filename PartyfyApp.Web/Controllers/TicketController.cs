@@ -76,5 +76,29 @@
             return RedirectToAction("All", "Event");
 
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Buy(TicketBuyViewModel model)
+        {
+            if (!await _ticketService.EnoughTicketsAsync(model))
+            {
+                TempData[ErrorMessage] = "There isn't enough tickets to be buyed!";
+                return RedirectToAction("All", "Event");
+            }
+
+            try
+            {
+                await _ticketService.BuyTicketsAsync(model, User.GetId());
+                TempData[SuccessMessage] = "Tickets buyed successfully!";
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError(string.Empty, "Unexpected error occurred while trying to buy tickets. Please try later or contact administrator!");
+                return RedirectToAction("Buy", new { model.EventId });
+            }
+
+            return RedirectToAction("MyTickets", "Ticket");
+
+        }
     }
 }

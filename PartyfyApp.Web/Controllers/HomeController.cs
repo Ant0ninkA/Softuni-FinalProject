@@ -21,7 +21,7 @@ namespace PartyfyApp.Web.Controllers
         {
             if (this.User.IsInRole(AdminRoleName))
             {
-                //return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
+                return RedirectToAction("Index", "Home", new { Area = AdminAreaName });
             }
             return View();
         }
